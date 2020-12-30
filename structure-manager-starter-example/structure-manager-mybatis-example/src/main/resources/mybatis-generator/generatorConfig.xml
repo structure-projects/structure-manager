@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- 配置生成器 -->
+<generatorConfiguration>
+    <!--执行generator插件生成文件的命令： call mvn mybatis-generator:generate -e -->
+    <!-- 引入配置文件 -->
+    <properties resource="mybatis-generator/mybatisGeneratorinit.properties"/>
+    <!--classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 可选 -->
+    <!--<classPathEntry location="E:\mybatis\mysql-connector-java-5.1.24-bin.jar" /> -->
+
+    <!-- 一个数据库一个context -->
+    <!--defaultModelType="flat" 大数据字段，不分表 -->
+    <context id="mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="com.github.oceanc.mybatis3.generator.plugin.SliceTablePlugin"/>
+        <plugin type="com.github.oceanc.mybatis3.generator.plugin.WhereSqlTextPlugin"/>
+        <plugin type="com.github.oceanc.mybatis3.generator.plugin.BatchInsertPlugin"/>
+        <plugin type="com.github.oceanc.mybatis3.generator.plugin.LombokAnnotationPlugin"/>
+        <plugin type="com.github.oceanc.mybatis3.generator.plugin.PaginationPlugin"/>
+        <plugin type="com.github.oceanc.mybatis3.generator.plugin.MinMaxPlugin"/>
+        <plugin type="com.github.oceanc.mybatis3.generator.plugin.OptimisticLockAutoIncreasePlugin"/>
+        <plugin type="com.github.oceanc.mybatis3.generator.plugin.SumSelectivePlugin"/>
+        <plugin type="com.github.oceanc.mybatis3.generator.plugin.UpdateSqlTextOfUpdateSelectivePlugin"/>
+        <plugin type="com.github.oceanc.mybatis3.generator.plugin.JacksonAnnotationPlugin"/>
+        <plugin type="com.github.oceanc.mybatis3.generator.plugin.JacksonToJsonPlugin"/>
+        <!--mybatis generator 根据数据库自动生成类  -->
+        <commentGenerator>
+            <!-- 关闭自动生成的注释 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="${jdbc_driver}" connectionURL="${jdbc_url}" userId="${jdbc_user}" password="${jdbc_password}" />
+        <javaModelGenerator targetPackage="${model}" targetProject="${java_url}" />
+        <sqlMapGenerator targetPackage="mapper" targetProject="${resources}" />
+        <javaClientGenerator targetPackage="${dao}" targetProject="${java_url}" type="XMLMAPPER" />
+        <table  tableName="${table_name}" ></table>
+    </context>
+</generatorConfiguration>
